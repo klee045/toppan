@@ -29,7 +29,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String name, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public Book(int id, String name, OffsetDateTime createdAt,
+            OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
