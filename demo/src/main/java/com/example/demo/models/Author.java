@@ -1,14 +1,15 @@
 package com.example.demo.models;
 
 import java.time.OffsetDateTime;
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,14 +17,15 @@ import jakarta.persistence.Table;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "authors_id_seq")
+    @SequenceGenerator(name = "authors_id_seq", sequenceName = "authors_id_seq", allocationSize = 1)
     private int id;
 
     @Column(columnDefinition = "character varying(255) COLLATE pg_catalog.\"default\" NOT NULL")
     private String name;
 
-    @ManyToMany
-    private Set<Book> books;
+    @OneToMany(mappedBy = "author")
+    private List<AuthorBooks> booksAuthored;
 
     @Column(name = "createdAt", columnDefinition = "timestamp with time zone not null")
     private OffsetDateTime createdAt;
@@ -34,11 +36,11 @@ public class Author {
     public Author() {
     }
 
-    public Author(int id, String name, Set<Book> books,
+    public Author(int id, String name, List<AuthorBooks> booksAuthored,
             OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
-        this.books = books;
+        this.booksAuthored = booksAuthored;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
