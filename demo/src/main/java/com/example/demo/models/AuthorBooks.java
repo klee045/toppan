@@ -1,5 +1,8 @@
 package com.example.demo.models;
 
+import java.time.OffsetDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -21,4 +24,10 @@ public class AuthorBooks {
     @MapsId("bookId")
     @JoinColumn(name = "book_id")
     private Book book;
+
+    @Column(name = "createdAt", columnDefinition = "timestamp with time zone not null")
+    private OffsetDateTime createdAt;
+
+    @Column(name = "updatedAt", columnDefinition = "timestamp with time zone not null")
+    private OffsetDateTime updatedAt;
 }
