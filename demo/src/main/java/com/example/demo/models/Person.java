@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import java.math.BigInteger;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -36,14 +35,14 @@ public class Person {
     private OffsetDateTime updatedAt;
 
     @Column(name = "country_id")
-    private BigInteger countryId;
+    private Long countryId;
 
     public Person() {
     }
 
     public Person(int id, String name, Set<Book> rentedBooks,
             OffsetDateTime createdAt, OffsetDateTime updatedAt,
-            BigInteger countryId) {
+            Long countryId) {
         this.id = id;
         this.name = name;
         this.rentedBooks = rentedBooks;
