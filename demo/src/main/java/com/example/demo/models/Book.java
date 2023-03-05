@@ -1,15 +1,19 @@
 package com.example.demo.models;
 
 import java.time.OffsetDateTime;
-import java.util.Set;
+import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "books")
@@ -22,8 +26,9 @@ public class Book {
     @Column(columnDefinition = "character varying(255) COLLATE pg_catalog.\"default\" NOT NULL")
     private String name;
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Author> authors;
+    @ElementCollection
+    @CollectionTable(name = "book_rents", joinColumns = @JoinColumn(name = "book_id", columnDefinition = "bigint"), foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private List<BookLoanHistory> bookLoanHistory;
 
     @Column(name = "createdAt", columnDefinition = "timestamp with time zone not null")
     private OffsetDateTime createdAt;
@@ -34,11 +39,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String name, Set<Author> authors,
+    public Book(int id, String name, List<BookLoanHistory> bookLoanHistory,
             OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
-        this.authors = authors;
+        this.bookLoanHistory = bookLoanHistory;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
