@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.model;
 
 import java.time.OffsetDateTime;
 import java.util.List;
