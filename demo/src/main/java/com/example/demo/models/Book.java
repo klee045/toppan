@@ -14,13 +14,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "books")
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "books_id_seq", sequenceName = "books_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_id_seq")
+    @Column(name = "id", columnDefinition = "integer NOT NULL DEFAULT nextval('books_id_seq'::regclass)")
     private int id;
 
     @Column(columnDefinition = "character varying(255) COLLATE pg_catalog.\"default\" NOT NULL")

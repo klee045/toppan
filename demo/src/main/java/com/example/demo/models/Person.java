@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.ConstraintMode;
@@ -20,7 +21,9 @@ import jakarta.persistence.ConstraintMode;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "people_id_seq", sequenceName = "people_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "people_id_seq")
+    @Column(name = "id", columnDefinition = "integer NOT NULL DEFAULT nextval('people_id_seq'::regclass)")
     private int id;
 
     @Column(columnDefinition = "character varying(255) COLLATE pg_catalog.\"default\" NOT NULL")

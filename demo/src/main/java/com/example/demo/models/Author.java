@@ -17,8 +17,9 @@ import jakarta.persistence.Table;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "authors_id_seq")
     @SequenceGenerator(name = "authors_id_seq", sequenceName = "authors_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authors_id_seq")
+    @Column(name = "id", columnDefinition = "integer NOT NULL DEFAULT nextval('authors_id_seq'::regclass)")
     private int id;
 
     @Column(columnDefinition = "character varying(255) COLLATE pg_catalog.\"default\" NOT NULL")
