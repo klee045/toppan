@@ -1,116 +1,125 @@
 -- Initialise authors
-INSERT INTO authors (name, created_at, updated_at) VALUES ('N.K. Jemisin', NOW(), NOW())
-INSERT INTO authors (name, created_at, updated_at) VALUES ('J.K. Rowling', NOW(), NOW())
-INSERT INTO authors (name, created_at, updated_at) VALUES ('Roald Dahl', NOW(), NOW())
-INSERT INTO authors (name, created_at, updated_at) VALUES ('William Peter Blatty', NOW(), NOW())
+INSERT INTO authors (name, created_at, updated_at) VALUES 
+    ('N.K. Jemisin', NOW(), NOW()),
+    ('J.K. Rowling', NOW(), NOW()),
+    ('Roald Dahl', NOW(), NOW()),
+    ('William Peter Blatty', NOW(), NOW());
 
 -- Initialise books
-INSERT INTO books (name, created_at, updated_at) VALUES ('The Stone Sky', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('The Obelisk Gate', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('The Fifth Season', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('The Exorcist', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 5', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 6', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 7', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 8', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 9', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 10', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 11', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 12', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 13', NOW(), NOW())
-INSERT INTO books (name, created_at, updated_at) VALUES ('Harry Potter 14', NOW(), NOW())
+INSERT INTO books (name, created_at, updated_at) VALUES 
+    ('The Stone Sky', NOW(), NOW()),
+    ('The Obelisk Gate', NOW(), NOW()),
+    ('The Fifth Season', NOW(), NOW()),
+    ('The Exorcist', NOW(), NOW()),
+    ('Harry Potter 5', NOW(), NOW()),
+    ('Harry Potter 6', NOW(), NOW()),
+    ('Harry Potter 7', NOW(), NOW()),
+    ('Harry Potter 8', NOW(), NOW()),
+    ('Harry Potter 9', NOW(), NOW()),
+    ('Harry Potter 10', NOW(), NOW()),
+    ('Harry Potter 11', NOW(), NOW()),
+    ('Harry Potter 12', NOW(), NOW()),
+    ('Harry Potter 13', NOW(), NOW()),
+    ('Harry Potter 14', NOW(), NOW());
 
 -- Initialise people
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Amy1', 702, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Amy2', 702, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Amy3', 702, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Amy4', 702, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Amy5', 702, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob1', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob2', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob3', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob4', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob5', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob6', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob7', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Bob8', 458, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles1', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles2', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles3', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles4', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles5', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles6', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles7', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles8', 840, NOW(), NOW())
-INSERT INTO people (name, country_id, created_at, updated_at) VALUES ('Charles9', 840, NOW(), NOW())
+INSERT INTO people (name, country_id, created_at, updated_at) VALUES 
+    ('Amy2', 702, NOW(), NOW()),
+    ('Amy1', 702, NOW(), NOW()),
+    ('Amy3', 702, NOW(), NOW()),
+    ('Amy4', 702, NOW(), NOW()),
+    ('Bob1', 458, NOW(), NOW()),
+    ('Amy5', 702, NOW(), NOW()),
+    ('Bob2', 458, NOW(), NOW()),
+    ('Bob3', 458, NOW(), NOW()),
+    ('Bob4', 458, NOW(), NOW()),
+    ('Bob5', 458, NOW(), NOW()),
+    ('Bob6', 458, NOW(), NOW()),
+    ('Bob7', 458, NOW(), NOW()),
+    ('Bob8', 458, NOW(), NOW()),
+    ('Charles1', 840, NOW(), NOW()),
+    ('Charles2', 840, NOW(), NOW()),
+    ('Charles3', 840, NOW(), NOW()),
+    ('Charles4', 840, NOW(), NOW()),
+    ('Charles5', 840, NOW(), NOW()),
+    ('Charles6', 840, NOW(), NOW()),
+    ('Charles7', 840, NOW(), NOW()),
+    ('Charles8', 840, NOW(), NOW()),
+    ('Charles9', 840, NOW(), NOW());
 
 -- Initiliase author_books
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (1, 2, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (1, 3, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (4, 4, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (3, 14, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 5, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 6, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 7, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 8, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 9, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 10, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 11, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 12, NOW(), NOW())
-INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES (2, 13, NOW(), NOW())
+INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES 
+    (1, 1, NOW(), NOW()),
+    (1, 2, NOW(), NOW()),
+    (1, 3, NOW(), NOW()),
+    (4, 4, NOW(), NOW()),
+    (3, 14, NOW(), NOW()),
+    (2, 5, NOW(), NOW()),
+    (2, 6, NOW(), NOW()),
+    (2, 7, NOW(), NOW()),
+    (2, 8, NOW(), NOW()),
+    (2, 9, NOW(), NOW()),
+    (2, 10, NOW(), NOW()),
+    (2, 11, NOW(), NOW()),
+    (2, 12, NOW(), NOW()),
+    (2, 13, NOW(), NOW());
 
 -- Initialise book_rents
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (5, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (6, 1, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (2, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (1, 2, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 3, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 3, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 3, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 3, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (3, 3, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
-INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES (4, 5, NOW(), NOW())
+INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES 
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (1, 1, NOW(), NOW()),
+    (2, 1, NOW(), NOW()),
+    (2, 1, NOW(), NOW()),
+    (3, 1, NOW(), NOW()),
+    (4, 1, NOW(), NOW()),
+    (5, 1, NOW(), NOW()),
+    (2, 1, NOW(), NOW()),
+    (3, 1, NOW(), NOW()),
+    (4, 1, NOW(), NOW()),
+    (6, 1, NOW(), NOW()),
+    (1, 2, NOW(), NOW()),
+    (1, 2, NOW(), NOW()),
+    (1, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (2, 2, NOW(), NOW()),
+    (1, 2, NOW(), NOW()),
+    (3, 3, NOW(), NOW()),
+    (3, 3, NOW(), NOW()),
+    (3, 3, NOW(), NOW()),
+    (3, 3, NOW(), NOW()),
+    (3, 3, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (4, 5, NOW(), NOW()),
+    (16, 5, NOW(), NOW()),
+    (14, 5, NOW(), NOW()),
+    (6, 8, NOW(), NOW()),
+    (14, 8, NOW(), NOW()),
+    (14, 8, NOW(), NOW()),
+    (14, 8, NOW(), NOW());
