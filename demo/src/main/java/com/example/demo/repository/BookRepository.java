@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -82,11 +83,12 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
                     number_of_loans_by_person_in_country
                 FROM finalised_results fr
                 JOIN author_books ab ON ab.book_id = fr.book_id
-                JOIN authors ON authors.id = ab.author_id
+                JOIN authors ON authors.\"id\" = ab.author_id
             )
             SELECT *
             FROM final_results_with_author fr
             WHERE :countryId IS NULL OR fr.country_id = :countryId
                     """, nativeQuery = true)
-    List<Book> getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(@Param("countryId") Long countryId);
+    List<Map<String, Object>> getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(
+            @Param("countryId") Long countryId);
 }
