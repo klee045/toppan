@@ -34,10 +34,8 @@ public class BookController {
     public ResponseEntity<List<Map<String, Object>>> getTop3ReadBooks(
             @RequestParam(value = "country_code", required = false) String countryCode)
             throws BadRequestException, NoResultException {
-        // try {
         System.out.println("GET /getTop3ReadBooks");
         System.out.println("@@@@ countryCode = " + countryCode);
-        List<Map<String, Object>> books = new ArrayList<Map<String, Object>>();
         Long countryId = null;
 
         // Get the corresponding countryId for the input countryCode if not null
@@ -59,14 +57,15 @@ public class BookController {
         }
         System.out.println("@@@@@@@@ countryId " + countryId);
         // Call the query and add the result into the books array
-        bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(countryId).forEach(books::add);
+        List<Map<String, Object>> books = new ArrayList<Map<String, Object>>(
+                bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(countryId));
         System.out.println("@@@@@@@@ books " + books);
-
-        // Format the response
 
         if (books.isEmpty()) {
             throw new NoResultException("no results");
         }
+
+        // Format the response
 
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
