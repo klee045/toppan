@@ -86,11 +86,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             )
             SELECT *
             FROM final_results_with_author fr
-            WHERE
-                CASE
-                    WHEN :countryId IS NOT NULL THEN fr.country_id = :countryId
-                    ELSE 1=1
-                END
+            WHERE :countryId IS NULL OR fr.country_id = :countryId
                     """, nativeQuery = true)
     List<Book> getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(@Param("countryId") Long countryId);
 }
