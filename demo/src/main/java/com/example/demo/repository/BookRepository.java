@@ -77,9 +77,9 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
                 SELECT
                     country_id,
                     fr.book_id,
-                    book_name,
-                    authors.name AS \"author_name\",
-                    top_3_borrower_in_country,
+                    book_name AS \"book\",
+                    authors.name AS \"author\",
+                    top_3_borrower_in_country AS \"borrower\",
                     number_of_loans_by_person_in_country
                 FROM finalised_results fr
                 JOIN author_books ab ON ab.book_id = fr.book_id
