@@ -8,8 +8,8 @@ WITH loan_count_by_country AS (
 ), top_3_books_by_country AS (
 	SELECT *
 	FROM (
-		SELECT 
-			*, 
+		SELECT
+			*,
 			ROW_NUMBER() OVER (
 				PARTITION BY loan_count_by_country.country_id
 				ORDER BY loan_count_by_country.number_of_loans_in_country DESC
@@ -18,7 +18,7 @@ WITH loan_count_by_country AS (
 	WHERE row_id < 4
 ), loan_count_by_book_and_country AS (
 	SELECT
-		b.id AS "book_id", b.name, 
+		b.id AS "book_id", b.name,
 		ppl.country_id,
 		ppl.id AS "ppl_id",
 		ppl.name AS "ppl_name",
@@ -26,28 +26,42 @@ WITH loan_count_by_country AS (
 	FROM books b
 	JOIN book_rents br ON br.book_id = b.id
 	JOIN people ppl ON ppl.id = br.person_id
-	GROUP BY b.id, ppl.country_id, ppl.id 
+	GROUP BY b.id, ppl.country_id, ppl.id
 	ORDER BY b.id, ppl.country_id, ppl.id
 ), top_3_ppl_by_book_and_country AS (
 	SELECT *
 	FROM (
-		SELECT 
-			*, 
+		SELECT
+			*,
 			ROW_NUMBER() OVER (
 				PARTITION BY loan_count_by_book_and_country.book_id, loan_count_by_book_and_country.country_id
 				ORDER BY loan_count_by_book_and_country.number_of_loans_by_person_in_country DESC
 			) AS row_id FROM loan_count_by_book_and_country
 	) AS A
 	WHERE row_id < 4
+), finalised_results AS (
+	SELECT
+		bbc.country_id,
+		pbbc.book_id,
+		bbc.name AS "book_name",
+		bbc.number_of_loans_in_country,
+		pbbc.ppl_name AS "top_3_borrower_in_country",
+		pbbc.number_of_loans_by_person_in_country
+	FROM top_3_books_by_country bbc
+	JOIN top_3_ppl_by_book_and_country pbbc
+	ON bbc.country_id = pbbc.country_id AND bbc.id = pbbc.book_id
+), final_results_with_author AS (
+	SELECT
+		country_id,
+		fr.book_id,
+		book_name AS "book",
+		authors.name AS "author",
+		top_3_borrower_in_country AS "borrower",
+		number_of_loans_by_person_in_country
+	FROM finalised_results fr
+	JOIN author_books ab ON ab.book_id = fr.book_id
+	JOIN authors ON authors."id" = ab.author_id
 )
-SELECT 
-	bbc.country_id,
-	pbbc.book_id,
-	bbc.name AS "book_name",
-	bbc.number_of_loans_in_country,
-	pbbc.ppl_name AS "top_3_borrower_in_country",
-	pbbc.number_of_loans_by_person_in_country
-FROM top_3_books_by_country bbc
-JOIN top_3_ppl_by_book_and_country pbbc
-ON bbc.country_id = pbbc.country_id AND bbc.id = pbbc.book_id 
-
+SELECT *
+FROM final_results_with_author fr
+WHERE :countryId IS NULL OR fr.country_id = :countryId
