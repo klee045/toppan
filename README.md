@@ -20,6 +20,8 @@ This is an MVP for us to gather more feedback. As a result, we have omitted a lo
 1. In your terminal, change directory to the base directory of the application: `cd demo`
 2. Run the command: `mvn spring-boot:run`
 3. If all is good, you will see the following image:
-   ![screenshot](https://github.com/klee045/toppan/blob/dev/run_app.png?raw=true)
-4. We can also test it via [Postman](https://www.postman.com/downloads/). Send a GET request to `http://localhost:8080/book/getTop3ReadBooks?country_code=us` will yield us the following result as seen in the image:
-   ![screenshot](https://github.com/klee045/toppan/blob/dev/get_req.png?raw=true)
+   ![run_app](https://user-images.githubusercontent.com/66959182/223981072-8d19bc8a-bff3-4fcf-b257-8658e12113fa.png)
+
+4. We can also test it via [Postman](https://www.postman.com/downloads/). Sending a GET request to `http://localhost:8080/book/getTop3ReadBooks?country_code=us` will yield us the following result as seen in the image:
+   ![get_req](https://user-images.githubusercontent.com/66959182/223981141-93eb2c76-9d7d-4fd7-8e61-fde60dcb8382.png)
+
