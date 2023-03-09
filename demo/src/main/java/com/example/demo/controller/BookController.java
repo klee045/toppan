@@ -1,8 +1,13 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,43 +36,134 @@ public class BookController {
     BookRepository bookRepository;
 
     @GetMapping("/getTop3ReadBooks")
-    public ResponseEntity<List<Map<String, Object>>> getTop3ReadBooks(
+    public ResponseEntity<List<Object>> getTop3ReadBooks(
             @RequestParam(value = "country_code", required = false) String countryCode)
             throws BadRequestException, NoResultException {
-        System.out.println("GET /getTop3ReadBooks");
-        System.out.println("@@@@ countryCode = " + countryCode);
         Long countryId = null;
 
         // Get the corresponding countryId for the input countryCode if not null
         if (countryCode != null) {
-            switch (countryCode.toUpperCase()) {
-            case "SG":
+            if (countryCode.toUpperCase().equals("SG")) {
                 countryId = Long.valueOf(702);
-                break;
-            case "MY":
+            } else if (countryCode.toUpperCase().equals("MY")) {
                 countryId = Long.valueOf(458);
-                break;
-            case "US":
+            } else if (countryCode.toUpperCase().equals("US")) {
                 countryId = Long.valueOf(840);
-                break;
-            default:
-                System.out.println("BAD REQUEST");
+            } else {
                 throw new BadRequestException("invalid parameter");
             }
         }
-        System.out.println("@@@@@@@@ countryId " + countryId);
         // Call the query and add the result into the books array
         List<Map<String, Object>> books = new ArrayList<Map<String, Object>>(
                 bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(countryId));
-        System.out.println("@@@@@@@@ books " + books);
 
         if (books.isEmpty()) {
             throw new NoResultException("no results");
         }
 
         // Format the response
+        List<Object> result = formatTop3Response(countryCode, books);
 
-        return new ResponseEntity<>(books, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // Helper Formatter Function
+    public List<Object> formatTop3Response(String countryCode, List<Map<String, Object>> books) {
+        Map<String, Object> hashMap = new HashMap<>();
+        List<Object> result = null;
+        if (countryCode != null) {
+            // use a hashmap to mimic a set, in the required format
+            // and if book is already in hashmap, extend the "borrower" array
+            for (Map<String, Object> book : books) {
+                String bookId = String.valueOf(book.get("book_id"));
+                String borrower = (String) book.get("borrower");
+
+                // if hashMap already contains this book, extend top 3 borrowers array
+                if (hashMap.containsKey(bookId)) {
+                    ((List) ((HashMap) hashMap.get(bookId)).get("borrower")).add(borrower);
+                    continue;
+                }
+
+                // Create a temp hash map in the required json format as the value
+                Map<String, Object> valueHashMap = new HashMap<>();
+                valueHashMap.put("author", book.get("author"));
+                valueHashMap.put("name", book.get("book"));
+                valueHashMap.put("borrower", new ArrayList<>());
+                ((List) valueHashMap.get("borrower")).add(borrower);
+
+                // Put the valueHashMap into the hashMap holder
+                hashMap.put(bookId, valueHashMap);
+            }
+
+            // Put hashMap into result
+            result = new ArrayList<>(hashMap.values());
+        }
+        // use a hashMap too but nest the one on top inside of countryId first { countryId: bookId: HashMap<>}
+        else {
+            // use a hashmap to mimic a set, in the required format
+            // and if book is already in hashmap, extend the "borrower" array
+            for (Map<String, Object> book : books) {
+                String bookCountryId = Long.toString((Long) book.get("country_id"));
+                String bookId = String.valueOf(book.get("book_id"));
+                String borrower = (String) book.get("borrower");
+
+                // if hashMap already has this country and contains this book, extend top 3 borrowers array
+                if (hashMap.containsKey(bookCountryId)) {
+                    // if book exists, add borrower to the borrowers array
+                    if (((HashMap) hashMap.get(bookCountryId)).containsKey(bookId)) {
+                        ((List) ((HashMap) ((HashMap) hashMap.get(bookCountryId)).get(bookId)).get("borrower"))
+                                .add(borrower);
+                    }
+                    // if book does not exist, create in country
+                    else {
+                        // Create a temp hash map in the required json format as the value
+                        Map<String, Object> valueHashMap = new HashMap<>();
+                        valueHashMap.put("author", book.get("author"));
+                        valueHashMap.put("name", book.get("book"));
+                        valueHashMap.put("borrower", new ArrayList<>());
+                        ((List) valueHashMap.get("borrower")).add(borrower);
+
+                        // Put the valueHashMap into the hashMap holder under the correct country
+                        ((HashMap) hashMap.get(bookCountryId)).put(bookId, valueHashMap);
+                    }
+                }
+                // if country does not yet exist, create new
+                else {
+                    // Create a temp hash map in the required json format as the value
+                    Map<String, Object> valueHashMap = new HashMap<>();
+                    valueHashMap.put("author", book.get("author"));
+                    valueHashMap.put("name", book.get("book"));
+                    valueHashMap.put("borrower", new ArrayList<>());
+                    ((List) valueHashMap.get("borrower")).add(borrower);
+
+                    // Put the valueHashMap into the hashMap holder under the correct country
+                    hashMap.put(bookCountryId, new HashMap<String, Object>());
+                    ((HashMap) hashMap.get(bookCountryId)).put(bookId, valueHashMap);
+                }
+            }
+
+            // Put hashMap into result
+            result = new ArrayList<>();
+            for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                Collection booksInfo = ((Map) value).values();
+                Map<String, Object> toAdd = new HashMap<>();
+                String country = null;
+
+                if (key.equals("702")) {
+                    country = "SG";
+                } else if (key.equals("458")) {
+                    country = "MY";
+                } else if (key.equals("840")) {
+                    country = "US";
+                }
+
+                toAdd.put(country, booksInfo);
+                result.add(toAdd);
+            }
+        }
+        return result;
     }
 
     /*
