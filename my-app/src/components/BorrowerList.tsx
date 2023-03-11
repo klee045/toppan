@@ -1,11 +1,13 @@
 import React, { CSSProperties } from "react";
 import Borrower from "./Borrower";
 
-const BorrowerListStyle: CSSProperties = {};
+const BorrowerListStyle: CSSProperties = {
+  width: "inherit",
+};
 
 const BorrowerList = ({ borrowers }: { borrowers: string[] }): JSX.Element => {
   return (
-    <div style={BorrowerListStyle}>
+    <div id="borrowerList" style={BorrowerListStyle}>
       {borrowers.map((borrower) => (
         <Borrower name={borrower} />
       ))}

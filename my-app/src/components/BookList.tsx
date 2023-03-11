@@ -1,18 +1,17 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 import Book from "./Book";
-import BorrowerList from "./BorrowerList";
 
 const BookListStyle: CSSProperties = {
   outlineStyle: "solid",
   outlineWidth: "1px",
-  height: "60%",
   width: "30%",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-around",
   alignItems: "center",
   alignSelf: "center",
-  marginBottom: "100px",
+  paddingTop: "20px",
+  paddingBottom: "20px",
 };
 
 const BookList = () => {
@@ -21,7 +20,7 @@ const BookList = () => {
     {
       author: "J.K. Rowling",
       name: "Harry Potter",
-      borrower: ["Charles1", "Charles2", "Charles3"],
+      borrower: ["Charles McGee", "Charles Malon", "Kevin Charles"],
     },
     {
       author: "William Peter Blatty",
@@ -35,6 +34,14 @@ const BookList = () => {
     },
   ];
 
+  const [toggleStates, setToggleState] = useState([true, false, false]);
+
+  const handleBookClick = (idx: number): void => {
+    const temp: boolean[] = [false, false, false];
+    temp[idx] = true;
+    setToggleState([...temp]);
+  };
+
   return (
     <div id="container" style={BookListStyle}>
       {books.map((book, index) => (
@@ -43,7 +50,7 @@ const BookList = () => {
           bookName={book.name}
           authorName={book.author}
           borrowers={book.borrower}
-          isToggled={false}
+          isToggled={toggleStates[index]}
         />
       ))}
     </div>
