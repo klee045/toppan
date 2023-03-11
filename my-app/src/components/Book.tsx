@@ -45,16 +45,23 @@ const Book = ({
   authorName,
   borrowers,
   isToggled,
+  handleBookClick,
 }: {
   idx: number;
   bookName: string;
   authorName: string;
   borrowers: string[];
   isToggled: boolean;
+  handleBookClick: (idx: number) => void;
 }): React.ReactElement => {
   return (
     <>
-      <div style={BookStyle}>
+      <div
+        style={BookStyle}
+        onClick={() => {
+          handleBookClick(idx - 1);
+        }}
+      >
         <div style={BookDescriptionStyle}>
           <div style={IdxDivStyle}>{idx}</div>
           <div style={BookNameDivStyle}>{bookName}</div>

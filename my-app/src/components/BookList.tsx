@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties } from "react";
 import Book from "./Book";
 
 const BookListStyle: CSSProperties = {
@@ -16,21 +16,17 @@ const BookListStyle: CSSProperties = {
 
 const BookList = ({
   books,
+  toggleStates,
+  handleBookClick,
 }: {
   books: {
     author: string;
     name: string;
     borrower: string[];
   }[];
+  toggleStates: boolean[];
+  handleBookClick: (idx: number) => void;
 }): React.ReactElement => {
-  const [toggleStates, setToggleState] = useState([false, false, false]);
-
-  const handleBookClick = (idx: number): void => {
-    const temp: boolean[] = [false, false, false];
-    temp[idx] = !toggleStates[idx];
-    setToggleState([...temp]);
-  };
-
   return (
     <div id="container" style={BookListStyle}>
       {books.length !== 0 ? (
@@ -46,9 +42,6 @@ const BookList = ({
               flex: "1",
               marginBottom: "20px",
             }}
-            onClick={() => {
-              handleBookClick(index);
-            }}
           >
             <Book
               idx={index + 1}
@@ -56,6 +49,7 @@ const BookList = ({
               authorName={book.author}
               borrowers={book.borrower}
               isToggled={toggleStates[index]}
+              handleBookClick={handleBookClick}
             />
           </div>
         ))
