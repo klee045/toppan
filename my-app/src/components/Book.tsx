@@ -9,6 +9,8 @@ const BookStyle: CSSProperties = {
   width: "70%",
 };
 
+const fontSize: string = "40px";
+
 const BookDescriptionStyle: CSSProperties = {
   display: "flex",
   flexDirection: "row",
@@ -16,16 +18,16 @@ const BookDescriptionStyle: CSSProperties = {
 };
 
 const IdxDivStyle: CSSProperties = {
-  fontSize: "48px",
+  fontSize: fontSize,
   marginLeft: "28px",
 };
 
 const BookNameDivStyle: CSSProperties = {
-  fontSize: "48px",
+  fontSize: fontSize,
 };
 
 const ArrowDivStyle: CSSProperties = {
-  fontSize: "48px",
+  fontSize: fontSize,
   marginRight: "28px",
   display: "flex",
   alignItems: "center",
