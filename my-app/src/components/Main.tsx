@@ -9,6 +9,18 @@ const Main = (): React.ReactElement => {
   >([]);
   const [countrySelected, setCountrySelected] = useState<string>("");
 
+  const [toggleStates, setToggleState] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
+
+  const handleBookClick = (idx: number): void => {
+    const temp: boolean[] = [false, false, false];
+    temp[idx] = !toggleStates[idx];
+    setToggleState([...temp]);
+  };
+
   const handleCountrySelectedClick = async (): Promise<void> => {
     // Call /getRandomCountry for a countryCode
     const {
@@ -38,6 +50,9 @@ const Main = (): React.ReactElement => {
       .catch((error) => {
         setBooks([]);
       });
+
+    // Reset state of toggleStates so all books reset to unexpanded state
+    setToggleState([false, false, false]);
   };
 
   return (
@@ -60,7 +75,11 @@ const Main = (): React.ReactElement => {
           height: "100%",
         }}
       >
-        <BookList books={books} />
+        <BookList
+          books={books}
+          toggleStates={toggleStates}
+          handleBookClick={handleBookClick}
+        />
       </div>
     </div>
   );
