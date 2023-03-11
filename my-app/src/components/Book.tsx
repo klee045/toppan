@@ -51,7 +51,7 @@ const Book = ({
   authorName: string;
   borrowers: string[];
   isToggled: boolean;
-}): JSX.Element => {
+}): React.ReactElement => {
   return (
     <>
       <div style={BookStyle}>

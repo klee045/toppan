@@ -14,26 +14,15 @@ const BookListStyle: CSSProperties = {
   paddingBottom: "20px",
 };
 
-const BookList = () => {
-  // hardcode the booklist for now, until the country selection is implemented
-  const books = [
-    {
-      author: "J.K. Rowling",
-      name: "Harry Potter",
-      borrower: ["Charles McGee", "Charles Malon", "Kevin Charles"],
-    },
-    {
-      author: "William Peter Blatty",
-      name: "The Exorcist",
-      borrower: ["Amy1", "Amy2", "Amy3"],
-    },
-    {
-      author: "N.K. Jemisin",
-      name: "The Stone Sky",
-      borrower: ["Bob1", "Bob2", "Bob3"],
-    },
-  ];
-
+const BookList = ({
+  books,
+}: {
+  books: {
+    author: string;
+    name: string;
+    borrower: string[];
+  }[];
+}): React.ReactElement => {
   const [toggleStates, setToggleState] = useState([false, false, false]);
 
   const handleBookClick = (idx: number): void => {
@@ -44,30 +33,35 @@ const BookList = () => {
 
   return (
     <div id="container" style={BookListStyle}>
-      {books.map((book, index) => (
-        <div
-          id={`book-item-${index + 1}`}
-          style={{
-            display: "inline-flex",
-            width: "80%",
-            flexDirection: "column",
-            alignItems: "center",
-            flex: "1",
-            marginBottom: "20px",
-          }}
-          onClick={() => {
-            handleBookClick(index);
-          }}
-        >
-          <Book
-            idx={index + 1}
-            bookName={book.name}
-            authorName={book.author}
-            borrowers={book.borrower}
-            isToggled={toggleStates[index]}
-          />
-        </div>
-      ))}
+      {books.length !== 0 ? (
+        books.map((book, index) => (
+          <div
+            key={index + 1}
+            id={`book-item-${index + 1}`}
+            style={{
+              display: "inline-flex",
+              width: "80%",
+              flexDirection: "column",
+              alignItems: "center",
+              flex: "1",
+              marginBottom: "20px",
+            }}
+            onClick={() => {
+              handleBookClick(index);
+            }}
+          >
+            <Book
+              idx={index + 1}
+              bookName={book.name}
+              authorName={book.author}
+              borrowers={book.borrower}
+              isToggled={toggleStates[index]}
+            />
+          </div>
+        ))
+      ) : (
+        <div style={{ fontSize: "18px" }}>"No data found"</div>
+      )}
     </div>
   );
 };

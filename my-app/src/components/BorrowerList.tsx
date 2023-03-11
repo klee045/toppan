@@ -5,11 +5,17 @@ const BorrowerListStyle: CSSProperties = {
   width: "inherit",
 };
 
-const BorrowerList = ({ borrowers }: { borrowers: string[] }): JSX.Element => {
+const BorrowerList = ({
+  borrowers,
+}: {
+  borrowers: string[];
+}): React.ReactElement => {
   return (
     <div id="borrowerList" style={BorrowerListStyle}>
-      {borrowers.map((borrower) => (
-        <Borrower name={borrower} />
+      {borrowers.map((borrower, index) => (
+        <div key={index + 1}>
+          <Borrower name={borrower} />
+        </div>
       ))}
     </div>
   );
