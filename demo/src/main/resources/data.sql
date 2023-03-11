@@ -124,3 +124,10 @@ INSERT INTO book_rents (person_id, book_id, created_at, updated_at) VALUES
     (14, 8, NOW(), NOW()),
     (14, 8, NOW(), NOW()),
     (14, 8, NOW(), NOW());
+
+-- Initialise countries
+INSERT INTO countries (id, country_name, country_code) VALUES 
+    (1, 'Singapore', 'SG'),
+    (2, 'Malaysia', 'MY'),
+    (3, 'United States of America', 'US'),
+    (4, 'Japan', 'JPN');
