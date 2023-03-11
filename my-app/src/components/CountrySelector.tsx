@@ -6,7 +6,11 @@ import React, {
 } from "react";
 
 const CountrySelectorStyle: CSSProperties = {
-  display: "flex",
+  alignSelf: "flex-start",
+  backgroundColor: "bisque",
+  borderColor: "orange",
+  borderWidth: "2px",
+  padding: "2px",
 };
 
 const CountrySelector = (): JSX.Element => {

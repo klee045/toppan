@@ -4,11 +4,13 @@ import BorrowerList from "./BorrowerList";
 
 const BookListStyle: CSSProperties = {
   outlineStyle: "solid",
-  height: "100%",
+  height: "50%",
+  width: "50%",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-around",
   alignItems: "center",
+  alignSelf: "center",
 };
 
 const BookList = () => {
