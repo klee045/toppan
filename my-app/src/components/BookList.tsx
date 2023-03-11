@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { CSSProperties } from "react";
 import Book from "./Book";
 
 const BookListStyle: CSSProperties = {
@@ -42,9 +42,6 @@ const BookList = ({
               flex: "1",
               marginBottom: "20px",
             }}
-            onClick={() => {
-              handleBookClick(index);
-            }}
           >
             <Book
               idx={index + 1}
@@ -52,6 +49,7 @@ const BookList = ({
               authorName={book.author}
               borrowers={book.borrower}
               isToggled={toggleStates[index]}
+              handleBookClick={handleBookClick}
             />
           </div>
         ))
