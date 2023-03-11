@@ -17,9 +17,24 @@ public class BookLoanHistory {
     public BookLoanHistory() {
     }
 
-    public BookLoanHistory(OffsetDateTime createdAt,
-            OffsetDateTime updatedAt) {
+    public BookLoanHistory(OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

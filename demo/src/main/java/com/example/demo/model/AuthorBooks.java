@@ -37,12 +37,52 @@ public class AuthorBooks {
     public AuthorBooks() {
     }
 
-    public AuthorBooks(AuthorBooksKey id, Author author, Book book,
-            OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public AuthorBooks(AuthorBooksKey id, Author author, Book book, OffsetDateTime createdAt,
+            OffsetDateTime updatedAt) {
         this.id = id;
         this.author = author;
         this.book = book;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public AuthorBooksKey getId() {
+        return this.id;
+    }
+
+    public void setId(AuthorBooksKey id) {
+        this.id = id;
+    }
+
+    public Author getAuthor() {
+        return this.author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Book getBook() {
+        return this.book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

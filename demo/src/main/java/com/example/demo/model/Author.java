@@ -37,12 +37,52 @@ public class Author {
     public Author() {
     }
 
-    public Author(int id, String name, List<AuthorBooks> booksAuthored,
-            OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public Author(int id, String name, List<AuthorBooks> booksAuthored, OffsetDateTime createdAt,
+            OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.booksAuthored = booksAuthored;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<AuthorBooks> getBookLoanHistory() {
+        return this.booksAuthored;
+    }
+
+    public void setBooksAuthored(List<AuthorBooks> booksAuthored) {
+        this.booksAuthored = booksAuthored;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

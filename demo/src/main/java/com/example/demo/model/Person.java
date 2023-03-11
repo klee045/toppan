@@ -45,15 +45,61 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String name,
-            List<BookLoanHistory> personalLoanHistory,
-            OffsetDateTime createdAt, OffsetDateTime updatedAt,
-            Long countryId) {
+    public Person(int id, String name, List<BookLoanHistory> personalLoanHistory, OffsetDateTime createdAt,
+            OffsetDateTime updatedAt, Long countryId) {
         this.id = id;
         this.name = name;
         this.personalLoanHistory = personalLoanHistory;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.countryId = countryId;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<BookLoanHistory> getPersonalLoanHistory() {
+        return this.personalLoanHistory;
+    }
+
+    public void setPersonalLoanHistory(List<BookLoanHistory> personalLoanHistory) {
+        this.personalLoanHistory = personalLoanHistory;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Long getCountryId() {
+        return this.countryId;
+    }
+
+    public void setCountryId(Long countryId) {
         this.countryId = countryId;
     }
 }

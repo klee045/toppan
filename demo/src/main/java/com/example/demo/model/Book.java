@@ -42,12 +42,52 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String name, List<BookLoanHistory> bookLoanHistory,
-            OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public Book(int id, String name, List<BookLoanHistory> bookLoanHistory, OffsetDateTime createdAt,
+            OffsetDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.bookLoanHistory = bookLoanHistory;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<BookLoanHistory> getBookLoanHistory() {
+        return this.bookLoanHistory;
+    }
+
+    public void setPersonalLoanHistory(List<BookLoanHistory> bookLoanHistory) {
+        this.bookLoanHistory = bookLoanHistory;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OffsetDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

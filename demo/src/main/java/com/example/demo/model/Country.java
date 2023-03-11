@@ -36,7 +36,15 @@ public class Country {
         return this.countryCode;
     }
 
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
     public String getCountryFullName() {
         return this.countryFullName;
+    }
+
+    public void setCountryFullName(String countryFullName) {
+        this.countryFullName = countryFullName;
     }
 }
