@@ -18,18 +18,13 @@ const CountrySelectorStyle: CSSProperties = {
   fontSize: "18px",
 };
 
-const CountrySelector = (): React.ReactElement => {
-  const [countrySelected, setCountrySelected]: [
-    string,
-    Dispatch<SetStateAction<string>>
-  ] = useState("SG");
-
-  const handleClick = (): void => {
-    const countries: string[] = ["SG", "US", "MY"];
-    const randomId: number = Math.floor(Math.random() * countries.length);
-    setCountrySelected(countries[randomId]);
-  };
-
+const CountrySelector = ({
+  countrySelected,
+  handleClick,
+}: {
+  countrySelected: string;
+  handleClick: React.MouseEventHandler<HTMLButtonElement>;
+}): React.ReactElement => {
   return (
     <button id="action-btn" style={CountrySelectorStyle} onClick={handleClick}>
       Get country: {countrySelected}

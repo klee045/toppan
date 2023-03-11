@@ -14,26 +14,15 @@ const BookListStyle: CSSProperties = {
   paddingBottom: "20px",
 };
 
-const BookList = (): React.ReactElement => {
-  // hardcode the booklist for now, until the country selection is implemented
-  const books = [
-    {
-      author: "J.K. Rowling",
-      name: "Harry Potter",
-      borrower: ["Charles McGee", "Charles Malon", "Kevin Charles"],
-    },
-    {
-      author: "William Peter Blatty",
-      name: "The Exorcist",
-      borrower: ["Amy1", "Amy2", "Amy3"],
-    },
-    {
-      author: "N.K. Jemisin",
-      name: "The Stone Sky",
-      borrower: ["Bob1", "Bob2", "Bob3"],
-    },
-  ];
-
+const BookList = ({
+  books,
+}: {
+  books: {
+    author: string;
+    name: string;
+    borrower: string[];
+  }[];
+}): React.ReactElement => {
   const [toggleStates, setToggleState] = useState([false, false, false]);
 
   const handleBookClick = (idx: number): void => {
@@ -47,6 +36,7 @@ const BookList = (): React.ReactElement => {
       {books.length !== 0 ? (
         books.map((book, index) => (
           <div
+            key={index + 1}
             id={`book-item-${index + 1}`}
             style={{
               display: "inline-flex",
