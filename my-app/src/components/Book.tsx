@@ -5,7 +5,7 @@ const BookStyle: CSSProperties = {
   padding: "30px",
   borderRadius: "10px",
   boxShadow: "3px 6px 5px gray",
-  backgroundColor: "bisque",
+  backgroundColor: "rgb(241, 230, 230)",
   width: "70%",
 };
 
