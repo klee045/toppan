@@ -14,7 +14,7 @@ const BookListStyle: CSSProperties = {
   paddingBottom: "20px",
 };
 
-const BookList = () => {
+const BookList = (): React.ReactElement => {
   // hardcode the booklist for now, until the country selection is implemented
   const books = [
     {

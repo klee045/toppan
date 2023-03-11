@@ -18,7 +18,7 @@ const CountrySelectorStyle: CSSProperties = {
   fontSize: "18px",
 };
 
-const CountrySelector = (): JSX.Element => {
+const CountrySelector = (): React.ReactElement => {
   const [countrySelected, setCountrySelected]: [
     string,
     Dispatch<SetStateAction<string>>

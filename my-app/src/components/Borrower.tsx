@@ -9,7 +9,7 @@ const BorrowerStyle: CSSProperties = {
   fontSize: "24px",
 };
 
-const Borrower = ({ name }: { name: string }): JSX.Element => {
+const Borrower = ({ name }: { name: string }): React.ReactElement => {
   return (
     <div className="customer" style={BorrowerStyle}>
       {name}

@@ -2,7 +2,7 @@ import React from "react";
 import BookList from "./BookList";
 import CountrySelector from "./CountrySelector";
 
-const Main = () => {
+const Main = (): React.ReactElement => {
   return (
     <div
       style={{
