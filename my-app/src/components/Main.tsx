@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { SymbolDisplayPartKind } from "typescript";
 import BookList from "./BookList";
 import CountrySelector from "./CountrySelector";
 
@@ -18,29 +19,35 @@ const Main = (): React.ReactElement => {
   ] = useState("");
 
   const handleCountrySelectedClick = async (): Promise<void> => {
-    const countries: string[] = ["SG", "US", "MY"];
-    const randomId: number = Math.floor(Math.random() * countries.length);
-    const newCountry = countries[randomId];
-    setCountrySelected(newCountry);
-    console.log("newCountry =", newCountry);
+    // Call /getRandomCountry for a countryCode
+    const {
+      data: { country },
+    } = await axios.get("http://localhost:8080/country/getRandomCountry", {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    const newCountryCode: string = country.country_code;
+    setCountrySelected(newCountryCode);
 
-    // Call /getTop3ReadBooks and populate books array
-    const { data: books } = await axios.get(
-      "http://localhost:8080/book/getTop3ReadBooks",
-      {
+    // Call /getTop3ReadBooks and populate books array, set to empty array if exception
+    axios
+      .get("http://localhost:8080/book/getTop3ReadBooks", {
         params: {
-          country_code: newCountry,
+          country_code: newCountryCode,
         },
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
-      }
-    );
-
-    setBooks([...books]);
+      })
+      .then((response) => {
+        const { data: books } = response;
+        setBooks([...books]);
+      })
+      .catch((error) => {
+        setBooks([]);
+      });
   };
-
-  useEffect(() => {});
 
   return (
     <div
