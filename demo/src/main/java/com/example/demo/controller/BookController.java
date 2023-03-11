@@ -24,7 +24,7 @@ import com.example.demo.repository.BookRepository;
 
 import jakarta.persistence.NoResultException;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/book")
 public class BookController {
