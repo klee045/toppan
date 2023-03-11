@@ -44,30 +44,34 @@ const BookList = (): React.ReactElement => {
 
   return (
     <div id="container" style={BookListStyle}>
-      {books.map((book, index) => (
-        <div
-          id={`book-item-${index + 1}`}
-          style={{
-            display: "inline-flex",
-            width: "80%",
-            flexDirection: "column",
-            alignItems: "center",
-            flex: "1",
-            marginBottom: "20px",
-          }}
-          onClick={() => {
-            handleBookClick(index);
-          }}
-        >
-          <Book
-            idx={index + 1}
-            bookName={book.name}
-            authorName={book.author}
-            borrowers={book.borrower}
-            isToggled={toggleStates[index]}
-          />
-        </div>
-      ))}
+      {books.length !== 0 ? (
+        books.map((book, index) => (
+          <div
+            id={`book-item-${index + 1}`}
+            style={{
+              display: "inline-flex",
+              width: "80%",
+              flexDirection: "column",
+              alignItems: "center",
+              flex: "1",
+              marginBottom: "20px",
+            }}
+            onClick={() => {
+              handleBookClick(index);
+            }}
+          >
+            <Book
+              idx={index + 1}
+              bookName={book.name}
+              authorName={book.author}
+              borrowers={book.borrower}
+              isToggled={toggleStates[index]}
+            />
+          </div>
+        ))
+      ) : (
+        <div style={{ fontSize: "18px" }}>"No data found"</div>
+      )}
     </div>
   );
 };
