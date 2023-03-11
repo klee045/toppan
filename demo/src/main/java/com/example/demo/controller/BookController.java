@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +48,8 @@ public class BookController {
             } else {
                 throw new BadRequestException("invalid parameter");
             }
+        } else {
+            throw new BadRequestException("invalid parameter");
         }
         // Call the query and add the result into the books array
         List<Map<String, Object>> books = new ArrayList<Map<String, Object>>(
@@ -64,102 +65,36 @@ public class BookController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // Helper Formatter Function
+    // Helper function to format query result into required json format
     public List<Object> formatTop3Response(String countryCode, List<Map<String, Object>> books) {
+        // use a hashmap to mimic a set through use of bookId, in the required format
         Map<String, Object> hashMap = new HashMap<>();
         List<Object> result = null;
-        if (countryCode != null) {
-            // use a hashmap to mimic a set, in the required format
-            // and if book is already in hashmap, extend the "borrower" array
-            for (Map<String, Object> book : books) {
-                String bookId = String.valueOf(book.get("book_id"));
-                String borrower = (String) book.get("borrower");
 
-                // if hashMap already contains this book, extend top 3 borrowers array
-                if (hashMap.containsKey(bookId)) {
-                    ((List) ((HashMap) hashMap.get(bookId)).get("borrower")).add(borrower);
-                    continue;
-                }
+        for (Map<String, Object> book : books) {
+            String bookId = String.valueOf(book.get("book_id"));
+            String borrower = (String) book.get("borrower");
 
-                // Create a temp hash map in the required json format as the value
-                Map<String, Object> valueHashMap = new HashMap<>();
-                valueHashMap.put("author", book.get("author"));
-                valueHashMap.put("name", book.get("book"));
-                valueHashMap.put("borrower", new ArrayList<>());
-                ((List) valueHashMap.get("borrower")).add(borrower);
-
-                // Put the valueHashMap into the hashMap holder
-                hashMap.put(bookId, valueHashMap);
+            // if hashMap already contains this book, extend top 3 borrowers array
+            if (hashMap.containsKey(bookId)) {
+                ((List) ((HashMap) hashMap.get(bookId)).get("borrower")).add(borrower);
+                continue;
             }
 
-            // Put hashMap into result
-            result = new ArrayList<>(hashMap.values());
+            // Create a temp hash map in the required json format as the value
+            Map<String, Object> valueHashMap = new HashMap<>();
+            valueHashMap.put("author", book.get("author"));
+            valueHashMap.put("name", book.get("book"));
+            valueHashMap.put("borrower", new ArrayList<>());
+            ((List) valueHashMap.get("borrower")).add(borrower);
+
+            // Put the valueHashMap into the hashMap holder
+            hashMap.put(bookId, valueHashMap);
         }
-        // use a hashMap too but nest the one on top inside of countryId first { countryId: bookId: HashMap<>}
-        else {
-            // use a hashmap to mimic a set, in the required format
-            // and if book is already in hashmap, extend the "borrower" array
-            for (Map<String, Object> book : books) {
-                String bookCountryId = Long.toString((Long) book.get("country_id"));
-                String bookId = String.valueOf(book.get("book_id"));
-                String borrower = (String) book.get("borrower");
 
-                // if hashMap already has this country and contains this book, extend top 3 borrowers array
-                if (hashMap.containsKey(bookCountryId)) {
-                    // if book exists, add borrower to the borrowers array
-                    if (((HashMap) hashMap.get(bookCountryId)).containsKey(bookId)) {
-                        ((List) ((HashMap) ((HashMap) hashMap.get(bookCountryId)).get(bookId)).get("borrower"))
-                                .add(borrower);
-                    }
-                    // if book does not exist, create in country
-                    else {
-                        // Create a temp hash map in the required json format as the value
-                        Map<String, Object> valueHashMap = new HashMap<>();
-                        valueHashMap.put("author", book.get("author"));
-                        valueHashMap.put("name", book.get("book"));
-                        valueHashMap.put("borrower", new ArrayList<>());
-                        ((List) valueHashMap.get("borrower")).add(borrower);
+        // Put hashMap into result
+        result = new ArrayList<>(hashMap.values());
 
-                        // Put the valueHashMap into the hashMap holder under the correct country
-                        ((HashMap) hashMap.get(bookCountryId)).put(bookId, valueHashMap);
-                    }
-                }
-                // if country does not yet exist, create new
-                else {
-                    // Create a temp hash map in the required json format as the value
-                    Map<String, Object> valueHashMap = new HashMap<>();
-                    valueHashMap.put("author", book.get("author"));
-                    valueHashMap.put("name", book.get("book"));
-                    valueHashMap.put("borrower", new ArrayList<>());
-                    ((List) valueHashMap.get("borrower")).add(borrower);
-
-                    // Put the valueHashMap into the hashMap holder under the correct country
-                    hashMap.put(bookCountryId, new HashMap<String, Object>());
-                    ((HashMap) hashMap.get(bookCountryId)).put(bookId, valueHashMap);
-                }
-            }
-
-            // Put hashMap into result
-            result = new ArrayList<>();
-            for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                Collection booksInfo = ((Map) value).values();
-                Map<String, Object> toAdd = new HashMap<>();
-                String country = null;
-
-                if (key.equals("702")) {
-                    country = "SG";
-                } else if (key.equals("458")) {
-                    country = "MY";
-                } else if (key.equals("840")) {
-                    country = "US";
-                }
-
-                toAdd.put(country, booksInfo);
-                result.add(toAdd);
-            }
-        }
         return result;
     }
 
