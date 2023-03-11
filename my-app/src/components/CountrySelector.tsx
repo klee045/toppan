@@ -1,9 +1,4 @@
-import React, {
-  CSSProperties,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from "react";
+import React, { CSSProperties } from "react";
 
 const CountrySelectorStyle: CSSProperties = {
   alignSelf: "flex-start",

@@ -1,22 +1,13 @@
 import axios from "axios";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { SymbolDisplayPartKind } from "typescript";
+import React, { useState } from "react";
 import BookList from "./BookList";
 import CountrySelector from "./CountrySelector";
 
 const Main = (): React.ReactElement => {
-  const [books, setBooks]: [
-    Array<{ author: string; name: string; borrower: string[] }>,
-    Dispatch<
-      SetStateAction<
-        Array<{ author: string; name: string; borrower: string[] }>
-      >
-    >
-  ] = useState(Array());
-  const [countrySelected, setCountrySelected]: [
-    string,
-    Dispatch<SetStateAction<string>>
-  ] = useState("");
+  const [books, setBooks] = useState<
+    { author: string; name: string; borrower: string[] }[]
+  >([]);
+  const [countrySelected, setCountrySelected] = useState<string>("");
 
   const handleCountrySelectedClick = async (): Promise<void> => {
     // Call /getRandomCountry for a countryCode

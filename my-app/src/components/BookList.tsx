@@ -23,7 +23,11 @@ const BookList = ({
     borrower: string[];
   }[];
 }): React.ReactElement => {
-  const [toggleStates, setToggleState] = useState([false, false, false]);
+  const [toggleStates, setToggleState] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
 
   const handleBookClick = (idx: number): void => {
     const temp: boolean[] = [false, false, false];
