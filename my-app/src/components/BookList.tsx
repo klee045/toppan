@@ -34,24 +34,39 @@ const BookList = () => {
     },
   ];
 
-  const [toggleStates, setToggleState] = useState([true, false, false]);
+  const [toggleStates, setToggleState] = useState([false, false, false]);
 
   const handleBookClick = (idx: number): void => {
     const temp: boolean[] = [false, false, false];
-    temp[idx] = true;
+    temp[idx] = !toggleStates[idx];
     setToggleState([...temp]);
   };
 
   return (
     <div id="container" style={BookListStyle}>
       {books.map((book, index) => (
-        <Book
-          idx={index + 1}
-          bookName={book.name}
-          authorName={book.author}
-          borrowers={book.borrower}
-          isToggled={toggleStates[index]}
-        />
+        <div
+          id={`book-item-${index + 1}`}
+          style={{
+            display: "inline-flex",
+            width: "80%",
+            flexDirection: "column",
+            alignItems: "center",
+            flex: "1",
+            marginBottom: "20px",
+          }}
+          onClick={() => {
+            handleBookClick(index);
+          }}
+        >
+          <Book
+            idx={index + 1}
+            bookName={book.name}
+            authorName={book.author}
+            borrowers={book.borrower}
+            isToggled={toggleStates[index]}
+          />
+        </div>
       ))}
     </div>
   );

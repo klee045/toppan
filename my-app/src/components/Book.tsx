@@ -53,17 +53,7 @@ const Book = ({
   isToggled: boolean;
 }): JSX.Element => {
   return (
-    <div
-      id={`book-item-${idx}`}
-      style={{
-        display: "inline-flex",
-        width: "80%",
-        flexDirection: "column",
-        alignItems: "center",
-        flex: "1",
-        marginBottom: "20px",
-      }}
-    >
+    <>
       <div style={BookStyle}>
         <div style={BookDescriptionStyle}>
           <div style={IdxDivStyle}>{idx}</div>
@@ -76,7 +66,7 @@ const Book = ({
       </div>
 
       {isToggled ? <BorrowerList borrowers={borrowers} /> : <></>}
-    </div>
+    </>
   );
 };
 
