@@ -88,4 +88,120 @@ public class BookServiceTest {
 
         assertEquals(actual, expected);
     }
+
+    @Test
+    void shouldGetTop3BooksForMy() throws BadRequestException, NoResultException {
+        List<Top3ReadBooksQueryResult> books = new ArrayList<>() {
+            {
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 1, "N.K. Jemisin", "The Stone Sky", "Jim Halpert",
+                        3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 1, "N.K. Jemisin", "The Stone Sky", "E.B. Farnum",
+                        2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 1, "N.K. Jemisin", "The Stone Sky", "Don Draper",
+                        1));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 2, "William Peter Blatty", "The Exorcist",
+                        "Jim Halpert", 3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 2, "William Peter Blatty", "The Exorcist",
+                        "E.B. Farnum", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 2, "William Peter Blatty", "The Exorcist",
+                        "Don Draper", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 3, "Brandon Sanderson", "The Final Empire",
+                        "Jim Halpert", 3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 3, "Brandon Sanderson", "The Final Empire",
+                        "E.B. Farnum", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(458), 3, "Brandon Sanderson", "The Final Empire",
+                        "Don Draper", 1));
+            }
+        };
+        // Uses mocked repo with the data intialized as seen above
+        Mockito.when(bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(Long.valueOf(458)))
+                .thenReturn(books);
+
+        List<Top3ReadBooksResponse> actual = bookService.getTop3ReadBooks("MY");
+        List<Top3ReadBooksResponse> expected = new ArrayList<>() {
+            {
+                add(new Top3ReadBooksResponse("N.K. Jemisin", "The Stone Sky", new ArrayList<>() {
+                    {
+                        add("Jim Halpert");
+                        add("E.B. Farnum");
+                        add("Don Draper");
+                    }
+                }));
+                add(new Top3ReadBooksResponse("William Peter Blatty", "The Exorcist", new ArrayList<>() {
+                    {
+                        add("Jim Halpert");
+                        add("E.B. Farnum");
+                        add("Don Draper");
+                    }
+                }));
+                add(new Top3ReadBooksResponse("Brandon Sanderson", "The Final Empire", new ArrayList<>() {
+                    {
+                        add("Jim Halpert");
+                        add("E.B. Farnum");
+                        add("Don Draper");
+                    }
+                }));
+            }
+        };
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void shouldGetTop3BooksForUs() throws BadRequestException, NoResultException {
+        List<Top3ReadBooksQueryResult> books = new ArrayList<>() {
+            {
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 1, "N.K. Jemisin", "The Stone Sky",
+                        "Darryl Philbin", 3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 1, "N.K. Jemisin", "The Stone Sky", "Betty Draper",
+                        2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 1, "N.K. Jemisin", "The Stone Sky", "Michael Scott",
+                        1));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 2, "William Peter Blatty", "The Exorcist",
+                        "Darryl Philbin", 3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 2, "William Peter Blatty", "The Exorcist",
+                        "Michael Scott", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 2, "William Peter Blatty", "The Exorcist",
+                        "Betty Draper", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 3, "Brandon Sanderson", "The Final Empire",
+                        "Darryl Philbin", 3));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 3, "Brandon Sanderson", "The Final Empire",
+                        "Betty Draper", 2));
+                add(new Top3ReadBooksQueryResult(Long.valueOf(840), 3, "Brandon Sanderson", "The Final Empire",
+                        "Michael Scott", 1));
+            }
+        };
+        // Uses mocked repo with the data intialized as seen above
+        Mockito.when(bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(Long.valueOf(458)))
+                .thenReturn(books);
+
+        List<Top3ReadBooksResponse> actual = bookService.getTop3ReadBooks("MY");
+        List<Top3ReadBooksResponse> expected = new ArrayList<>() {
+            {
+                add(new Top3ReadBooksResponse("N.K. Jemisin", "The Stone Sky", new ArrayList<>() {
+                    {
+                        add("Darryl Philbin");
+                        add("Betty Draper");
+                        add("Michael Scott");
+                    }
+                }));
+                add(new Top3ReadBooksResponse("William Peter Blatty", "The Exorcist", new ArrayList<>() {
+                    {
+                        add("Darryl Philbin");
+                        add("Michael Scott");
+                        add("Betty Draper");
+                    }
+                }));
+                add(new Top3ReadBooksResponse("Brandon Sanderson", "The Final Empire", new ArrayList<>() {
+                    {
+                        add("Darryl Philbin");
+                        add("Betty Draper");
+                        add("Michael Scott");
+                    }
+                }));
+            }
+        };
+
+        assertEquals(actual, expected);
+    }
 }
