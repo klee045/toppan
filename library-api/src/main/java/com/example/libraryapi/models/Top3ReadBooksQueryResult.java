@@ -1,6 +1,6 @@
 package com.example.libraryapi.models;
 
-public class Top3ReadBookQueryType {
+public class Top3ReadBooksQueryResult {
     private Long country_id;
     private int book_id;
     private String book;
@@ -8,7 +8,7 @@ public class Top3ReadBookQueryType {
     private String borrower;
     private int number_of_loans_by_person_in_country;
 
-    public Top3ReadBookQueryType(Long countryId, int bookId, String author, String name, String borrower,
+    public Top3ReadBooksQueryResult(Long countryId, int bookId, String author, String name, String borrower,
             int numLoans) {
         this.country_id = countryId;
         this.book_id = bookId;

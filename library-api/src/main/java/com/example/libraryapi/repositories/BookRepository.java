@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.libraryapi.models.Book;
-import com.example.libraryapi.models.Top3ReadBookQueryType;
+import com.example.libraryapi.models.Top3ReadBooksQueryResult;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
@@ -21,6 +21,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
      * 4, if country code is passed in, return top 3 books in THAT country, with the top 3 borrowers of each of those books within that specific country
      */
     @Query(name = "getTop3BookQuery", nativeQuery = true)
-    List<Top3ReadBookQueryType> getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(
+    List<Top3ReadBooksQueryResult> getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(
             @Param("countryId") Long countryId);
 }

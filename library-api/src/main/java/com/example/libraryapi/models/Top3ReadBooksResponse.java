@@ -3,13 +3,13 @@ package com.example.libraryapi.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Top3ReadBooksResult {
+public class Top3ReadBooksResponse {
 
     private String author;
     private String name;
     private List<String> borrowers = new ArrayList<>();
 
-    public Top3ReadBooksResult(String author, String name, List<String> borrowers) {
+    public Top3ReadBooksResponse(String author, String name, List<String> borrowers) {
         this.author = author;
         this.name = name;
         this.borrowers = borrowers;

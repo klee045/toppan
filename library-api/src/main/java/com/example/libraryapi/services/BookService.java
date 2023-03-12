@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.libraryapi.errorhandlers.BadRequestException;
 import com.example.libraryapi.errorhandlers.NoResultException;
-import com.example.libraryapi.models.Top3ReadBookQueryType;
-import com.example.libraryapi.models.Top3ReadBooksResult;
+import com.example.libraryapi.models.Top3ReadBooksQueryResult;
+import com.example.libraryapi.models.Top3ReadBooksResponse;
 import com.example.libraryapi.repositories.BookRepository;
 
 @Service
@@ -21,7 +21,7 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Top3ReadBooksResult> getTop3ReadBooks(String countryCode)
+    public List<Top3ReadBooksResponse> getTop3ReadBooks(String countryCode)
             throws BadRequestException, NoResultException {
         Long countryId = null;
 
@@ -41,7 +41,7 @@ public class BookService {
         }
 
         // Call the query and add the result into the books array
-        List<Top3ReadBookQueryType> books = new ArrayList<>(
+        List<Top3ReadBooksQueryResult> books = new ArrayList<>(
                 bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(countryId));
 
         if (books.isEmpty()) {
@@ -49,18 +49,18 @@ public class BookService {
         }
 
         // Format the response
-        List<Top3ReadBooksResult> result = formatTop3Response(countryCode, books);
+        List<Top3ReadBooksResponse> result = formatTop3Response(countryCode, books);
 
         return result;
     }
 
     // Helper function to format query result into required json format
-    public List<Top3ReadBooksResult> formatTop3Response(String countryCode, List<Top3ReadBookQueryType> books) {
+    public List<Top3ReadBooksResponse> formatTop3Response(String countryCode, List<Top3ReadBooksQueryResult> books) {
         // use a hashmap to mimic a set through use of bookId, in the required format
         Map<String, Object> hashMap = new HashMap<>();
-        List<Top3ReadBooksResult> result = new ArrayList<>();
+        List<Top3ReadBooksResponse> result = new ArrayList<>();
 
-        for (Top3ReadBookQueryType book : books) {
+        for (Top3ReadBooksQueryResult book : books) {
             String bookId = String.valueOf(book.getBook_id());
             String borrower = book.getBorrower();
 
@@ -87,7 +87,7 @@ public class BookService {
             String author = (String) ((Map) t).get("author");
             String name = (String) ((Map) t).get("name");
             List<String> borrowers = (List<String>) ((Map) t).get("borrower");
-            result.add(new Top3ReadBooksResult(author, name, borrowers));
+            result.add(new Top3ReadBooksResponse(author, name, borrowers));
         }
 
         return result;
