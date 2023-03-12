@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<button
+  id="action-btn"
+  onClick=""
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "backgroundColor": "rgb(241, 230, 230)",
+      "borderColor": "rgb(255, 116, 43)",
+      "borderWidth": "1px",
+      "fontSize": "18px",
+      "height": "5%",
+      "marginLeft": "25px",
+      "marginTop": "25px",
+      "padding": "4px",
+      "width": "9%",
+    }
+  }
+>
+  Get country: 
+  SG
+</button>
+`;

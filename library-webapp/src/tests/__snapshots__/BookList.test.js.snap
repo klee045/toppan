@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="container"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "space-around",
+      "outlineStyle": "solid",
+      "outlineWidth": "1px",
+      "paddingBottom": "20px",
+      "paddingTop": "20px",
+      "width": "30%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "fontSize": "18px",
+      }
+    }
+  >
+    "No data found"
+  </div>
+</div>
+`;
