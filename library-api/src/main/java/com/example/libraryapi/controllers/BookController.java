@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.libraryapi.errorhandlers.ApiError;
 import com.example.libraryapi.errorhandlers.BadRequestException;
 import com.example.libraryapi.errorhandlers.NoResultException;
+import com.example.libraryapi.models.Top3ReadBooksResult;
 import com.example.libraryapi.services.BookService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -26,10 +27,10 @@ public class BookController {
     BookService bookService;
 
     @GetMapping("/getTop3ReadBooks")
-    public ResponseEntity<List<Object>> getTop3ReadBooks(
+    public ResponseEntity<List<Top3ReadBooksResult>> getTop3ReadBooks(
             @RequestParam(value = "country_code", required = false) String countryCode)
             throws BadRequestException, NoResultException {
-        List<Object> result = bookService.getTop3ReadBooks(countryCode);
+        List<Top3ReadBooksResult> result = bookService.getTop3ReadBooks(countryCode);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
