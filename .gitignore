@@ -1,34 +1,34 @@
-demo/HELP.md
-demo/target/
-!demo/.mvn/wrapper/maven-wrapper.jar
-!demo/**/src/main/**/target/
-!demo/**/src/test/**/target/
+library-api/HELP.md
+library-api/target/
+!library-api/.mvn/wrapper/maven-wrapper.jar
+!library-api/**/src/main/**/target/
+!library-api/**/src/test/**/target/
 
 ### STS ###
-demo/.apt_generated
-demo/.classpath
-demo/.factorypath
-demo/.project
-demo/.settings
-demo/.springBeans
-demo/.sts4-cache
+library-api/.apt_generated
+library-api/.classpath
+library-api/.factorypath
+library-api/.project
+library-api/.settings
+library-api/.springBeans
+library-api/.sts4-cache
 
 ### IntelliJ IDEA ###
-demo/.idea
-demo/*.iws
-demo/*.iml
-demo/*.ipr
+library-api/.idea
+library-api/*.iws
+library-api/*.iml
+library-api/*.ipr
 
 ### NetBeans ###
-demo/nbproject/private/
-demo/nbbuild/
-demo/dist/
-demo/nbdist/
-demo/.nb-gradle/
-demo/build/
-!demo/**/src/main/**/build/
-!demo/**/src/test/**/build/
+library-api/nbproject/private/
+library-api/nbbuild/
+library-api/dist/
+library-api/nbdist/
+library-api/.nb-gradle/
+library-api/build/
+!library-api/**/src/main/**/build/
+!library-api/**/src/test/**/build/
 
 ### VS Code ###
-demo/.vscode/
+library-api/.vscode/
 .vscode
