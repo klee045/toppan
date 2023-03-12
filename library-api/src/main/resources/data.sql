@@ -20,7 +20,7 @@ INSERT INTO people (name, country_id, created_at, updated_at) VALUES
     ('Kevin Malone', 458, NOW(), NOW()),
     ('Rachel Menken', 840, NOW(), NOW()),
     ('Betty Draper', 840, NOW(), NOW()),
-    ('Michael Scott', 840, NOW(), NOW());
+    ('Michael Scott', 840, NOW(), NOW()),
     ('Darryl Philbin', 840, NOW(), NOW());
 
 INSERT INTO author_books (author_id, book_id, created_at, updated_at) VALUES 
