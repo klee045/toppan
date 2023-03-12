@@ -13,13 +13,13 @@ it("renders correctly", () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('has a div with id "action-btn"', () => {
+it('has a button with id "action-btn"', () => {
   const tree = renderer.create(
     <CountrySelector countrySelected={"SG"} handleClick={""} />
   );
   expect(
     shallow(<CountrySelector countrySelected={"SG"} />)
-      .find("div#action-btn")
+      .find("button#action-btn")
       .exists()
   ).toBe(true);
 });
