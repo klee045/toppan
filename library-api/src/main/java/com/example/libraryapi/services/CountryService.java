@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.libraryapi.models.Country;
@@ -13,8 +12,11 @@ import com.example.libraryapi.repositories.CountryRepository;
 
 @Service
 public class CountryService {
-    @Autowired
-    CountryRepository countryRepository;
+    private final CountryRepository countryRepository;
+
+    public CountryService(CountryRepository countryRepository) {
+        this.countryRepository = countryRepository;
+    }
 
     public Map<String, Object> getRandomCountry() {
         // Get all countries in db

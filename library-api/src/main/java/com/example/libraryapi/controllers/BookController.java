@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -17,21 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.libraryapi.errorhandlers.ApiError;
 import com.example.libraryapi.errorhandlers.BadRequestException;
 import com.example.libraryapi.errorhandlers.NoResultException;
+import com.example.libraryapi.models.Top3ReadBooksResponse;
 import com.example.libraryapi.services.BookService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/book")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
     @GetMapping("/getTop3ReadBooks")
-    public ResponseEntity<List<Object>> getTop3ReadBooks(
+    public ResponseEntity<List<Top3ReadBooksResponse>> getTop3ReadBooks(
             @RequestParam(value = "country_code", required = false) String countryCode)
             throws BadRequestException, NoResultException {
-        List<Object> result = bookService.getTop3ReadBooks(countryCode);
+        List<Top3ReadBooksResponse> result = bookService.getTop3ReadBooks(countryCode);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

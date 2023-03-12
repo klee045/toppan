@@ -5,19 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.libraryapi.errorhandlers.BadRequestException;
 import com.example.libraryapi.errorhandlers.NoResultException;
+import com.example.libraryapi.models.Top3ReadBooksQueryResult;
+import com.example.libraryapi.models.Top3ReadBooksResponse;
 import com.example.libraryapi.repositories.BookRepository;
 
 @Service
 public class BookService {
-    @Autowired
-    BookRepository bookRepository;
+    final BookRepository bookRepository;
 
-    public List<Object> getTop3ReadBooks(String countryCode) throws BadRequestException, NoResultException {
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public List<Top3ReadBooksResponse> getTop3ReadBooks(String countryCode)
+            throws BadRequestException, NoResultException {
         Long countryId = null;
 
         // Get the corresponding countryId for the input countryCode if not null
@@ -34,8 +39,9 @@ public class BookService {
         } else {
             throw new BadRequestException("invalid parameter");
         }
+
         // Call the query and add the result into the books array
-        List<Map<String, Object>> books = new ArrayList<Map<String, Object>>(
+        List<Top3ReadBooksQueryResult> books = new ArrayList<>(
                 bookRepository.getTop3BorrowedBooksInCountryAndTop3BorrowersWithinCountry(countryId));
 
         if (books.isEmpty()) {
@@ -43,20 +49,20 @@ public class BookService {
         }
 
         // Format the response
-        List<Object> result = formatTop3Response(countryCode, books);
+        List<Top3ReadBooksResponse> result = formatTop3Response(countryCode, books);
 
         return result;
     }
 
     // Helper function to format query result into required json format
-    public List<Object> formatTop3Response(String countryCode, List<Map<String, Object>> books) {
+    public List<Top3ReadBooksResponse> formatTop3Response(String countryCode, List<Top3ReadBooksQueryResult> books) {
         // use a hashmap to mimic a set through use of bookId, in the required format
         Map<String, Object> hashMap = new HashMap<>();
-        List<Object> result = null;
+        List<Top3ReadBooksResponse> result = new ArrayList<>();
 
-        for (Map<String, Object> book : books) {
-            String bookId = String.valueOf(book.get("book_id"));
-            String borrower = (String) book.get("borrower");
+        for (Top3ReadBooksQueryResult book : books) {
+            String bookId = String.valueOf(book.getBook_id());
+            String borrower = book.getBorrower();
 
             // if hashMap already contains this book, extend top 3 borrowers array
             if (hashMap.containsKey(bookId)) {
@@ -66,8 +72,8 @@ public class BookService {
 
             // Create a temp hash map in the required json format as the value
             Map<String, Object> valueHashMap = new HashMap<>();
-            valueHashMap.put("author", book.get("author"));
-            valueHashMap.put("name", book.get("book"));
+            valueHashMap.put("author", book.getAuthor());
+            valueHashMap.put("name", book.getBook());
             valueHashMap.put("borrower", new ArrayList<>());
             ((List) valueHashMap.get("borrower")).add(borrower);
 
@@ -76,7 +82,13 @@ public class BookService {
         }
 
         // Put hashMap into result
-        result = new ArrayList<>(hashMap.values());
+        List<Object> temp = new ArrayList<>(hashMap.values());
+        for (Object t : temp) {
+            String author = (String) ((Map) t).get("author");
+            String name = (String) ((Map) t).get("name");
+            List<String> borrowers = (List<String>) ((Map) t).get("borrower");
+            result.add(new Top3ReadBooksResponse(author, name, borrowers));
+        }
 
         return result;
     }

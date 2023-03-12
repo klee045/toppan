@@ -62,7 +62,7 @@ public class Author {
         this.name = name;
     }
 
-    public List<AuthorBooks> getBookLoanHistory() {
+    public List<AuthorBooks> getBooksAuthored() {
         return this.booksAuthored;
     }
 
