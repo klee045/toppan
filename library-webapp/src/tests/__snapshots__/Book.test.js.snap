@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "rgb(241, 230, 230)",
+      "borderRadius": "10px",
+      "boxShadow": "3px 6px 5px gray",
+      "padding": "30px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "fontSize": "40px",
+          "marginLeft": "28px",
+        }
+      }
+    >
+      1
+    </div>
+    <div
+      style={
+        Object {
+          "fontSize": "40px",
+        }
+      }
+    >
+      The Stone Sky
+    </div>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "fontSize": "40px",
+          "marginRight": "28px",
+        }
+      }
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g>
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path
+            d="M12 15l-4.243-4.243 1.415-1.414L12 12.172l2.828-2.829 1.415 1.414z"
+          />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "marginRight": "28px",
+        "textAlign": "end",
+      }
+    }
+  >
+    by 
+    N.K. Jemisin
+  </div>
+</div>
+`;

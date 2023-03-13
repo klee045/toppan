@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="customer"
+  style={
+    Object {
+      "backgroundColor": "rgb(255, 215, 215)",
+      "borderRadius": "10px",
+      "boxShadow": "3px 6px 5px gray",
+      "fontSize": "24px",
+      "marginTop": "20px",
+      "padding": "30px",
+    }
+  }
+>
+  Jon Hamm
+</div>
+`;
