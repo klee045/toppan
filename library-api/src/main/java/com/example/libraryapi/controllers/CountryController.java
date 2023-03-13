@@ -19,8 +19,8 @@ public class CountryController {
     CountryService countryService;
 
     @GetMapping("/getRandomCountry")
-    public ResponseEntity<Map<String, Object>> getRandomCountry() {
-        Map<String, Object> result = countryService.getRandomCountry();
+    public ResponseEntity<Map<String, Map<String, String>>> getRandomCountry() {
+        Map<String, Map<String, String>> result = countryService.getRandomCountry();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

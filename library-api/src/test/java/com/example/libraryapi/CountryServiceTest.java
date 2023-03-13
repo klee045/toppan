@@ -50,14 +50,14 @@ public class CountryServiceTest {
         Mockito.when(countryRepository.findAllCountries()).thenReturn(countries);
 
         // Create an actual and expected version of response to test and compare
-        Map<String, Object> actual = countryService.getRandomCountry();
-        Map<String, Object> expected = new HashMap<>() {
+        Map<String, Map<String, String>> actual = countryService.getRandomCountry();
+        Map<String, Map<String, String>> expected = new HashMap<>() {
             {
                 put("country", new HashMap<>());
             }
         };
-        ((Map<String, Object>) expected.get("country")).put("country_code", "SG");
-        ((Map<String, Object>) expected.get("country")).put("full_name", "Singapore");
+        expected.get("country").put("country_code", "SG");
+        expected.get("country").put("full_name", "Singapore");
 
         // Compare the keys of the json instead, since values might differ due to random selection
         assertEquals(actual.keySet(), expected.keySet());

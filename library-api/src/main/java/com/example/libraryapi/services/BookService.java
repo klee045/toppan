@@ -7,6 +7,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.example.libraryapi.common.pojos.AuthorNameValue;
+import com.example.libraryapi.common.pojos.BookNameValue;
+import com.example.libraryapi.common.pojos.BorrowerArrayValue;
+import com.example.libraryapi.common.pojos.DynamicTypeValue;
 import com.example.libraryapi.errorhandlers.BadRequestException;
 import com.example.libraryapi.errorhandlers.NoResultException;
 import com.example.libraryapi.models.Top3ReadBooksQueryResult;
@@ -57,7 +61,7 @@ public class BookService {
     // Helper function to format query result into required json format
     public List<Top3ReadBooksResponse> formatTop3Response(String countryCode, List<Top3ReadBooksQueryResult> books) {
         // use a hashmap to mimic a set through use of bookId, in the required format
-        Map<String, Object> hashMap = new HashMap<>();
+        Map<String, Map<String, DynamicTypeValue>> hashMap = new HashMap<>();
         List<Top3ReadBooksResponse> result = new ArrayList<>();
 
         for (Top3ReadBooksQueryResult book : books) {
@@ -66,27 +70,28 @@ public class BookService {
 
             // if hashMap already contains this book, extend top 3 borrowers array
             if (hashMap.containsKey(bookId)) {
-                ((List) ((HashMap) hashMap.get(bookId)).get("borrower")).add(borrower);
+                BorrowerArrayValue borrowerArrayValue = (BorrowerArrayValue) hashMap.get(bookId).get("borrower");
+                borrowerArrayValue.addBorrower(borrower);
                 continue;
             }
 
             // Create a temp hash map in the required json format as the value
-            Map<String, Object> valueHashMap = new HashMap<>();
-            valueHashMap.put("author", book.getAuthor());
-            valueHashMap.put("name", book.getBook());
-            valueHashMap.put("borrower", new ArrayList<>());
-            ((List) valueHashMap.get("borrower")).add(borrower);
+            Map<String, DynamicTypeValue> valueHashMap = new HashMap<>();
+            valueHashMap.put("author", new AuthorNameValue(book.getAuthor()));
+            valueHashMap.put("name", new BookNameValue(book.getBook()));
+            valueHashMap.put("borrower", new BorrowerArrayValue(new ArrayList<>()));
+            ((BorrowerArrayValue) valueHashMap.get("borrower")).addBorrower(borrower);
 
             // Put the valueHashMap into the hashMap holder
             hashMap.put(bookId, valueHashMap);
         }
 
         // Put hashMap into result
-        List<Object> temp = new ArrayList<>(hashMap.values());
-        for (Object t : temp) {
-            String author = (String) ((Map) t).get("author");
-            String name = (String) ((Map) t).get("name");
-            List<String> borrowers = (List<String>) ((Map) t).get("borrower");
+        List<Map<String, DynamicTypeValue>> temp = new ArrayList<>(hashMap.values());
+        for (Map<String, DynamicTypeValue> t : temp) {
+            String author = ((AuthorNameValue) t.get("author")).getAuthorName();
+            String name = ((BookNameValue) t.get("name")).getBookName();
+            List<String> borrowers = ((BorrowerArrayValue) t.get("borrower")).getBorrowers();
             result.add(new Top3ReadBooksResponse(author, name, borrowers));
         }
 

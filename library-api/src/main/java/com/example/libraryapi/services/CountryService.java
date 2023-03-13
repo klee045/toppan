@@ -18,7 +18,7 @@ public class CountryService {
         this.countryRepository = countryRepository;
     }
 
-    public Map<String, Object> getRandomCountry() {
+    public Map<String, Map<String, String>> getRandomCountry() {
         // Get all countries in db
         List<Country> countries = countryRepository.findAllCountries();
 
@@ -27,10 +27,10 @@ public class CountryService {
         int n = rand.nextInt(countries.size());
 
         // Format into response requirement
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Map<String, String>> result = new HashMap<>();
         result.put("country", new HashMap<String, String>());
-        ((Map<String, Object>) result.get("country")).put("full_name", countries.get(n).getCountryFullName());
-        ((Map<String, Object>) result.get("country")).put("country_code", countries.get(n).getCountryCode());
+        result.get("country").put("full_name", countries.get(n).getCountryFullName());
+        result.get("country").put("country_code", countries.get(n).getCountryCode());
 
         return result;
     }

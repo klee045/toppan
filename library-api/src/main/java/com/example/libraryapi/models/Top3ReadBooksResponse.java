@@ -7,12 +7,12 @@ public class Top3ReadBooksResponse {
 
     private String author;
     private String name;
-    private List<String> borrowers = new ArrayList<>();
+    private List<String> borrower = new ArrayList<>();
 
     public Top3ReadBooksResponse(String author, String name, List<String> borrowers) {
         this.author = author;
         this.name = name;
-        this.borrowers = borrowers;
+        this.borrower = borrowers;
     }
 
     public String getAuthor() {
@@ -31,12 +31,12 @@ public class Top3ReadBooksResponse {
         this.name = name;
     }
 
-    public List<String> getBorrowers() {
-        return this.borrowers;
+    public List<String> getBorrower() {
+        return this.borrower;
     }
 
-    public void setBorrowers(List<String> borrowers) {
-        this.borrowers = new ArrayList<>(borrowers);
+    public void setBorrower(List<String> borrowers) {
+        this.borrower = new ArrayList<>(borrowers);
     }
 
     public boolean listOfStringEquals(List<String> l1, List<String> l2) {
@@ -65,7 +65,7 @@ public class Top3ReadBooksResponse {
         Top3ReadBooksResponse response = (Top3ReadBooksResponse) o;
 
         return response.author.equals(author) && response.name.equals(name)
-                && listOfStringEquals(response.borrowers, borrowers);
+                && listOfStringEquals(response.borrower, borrower);
     }
 
     @Override
@@ -78,6 +78,6 @@ public class Top3ReadBooksResponse {
 
     @Override
     public String toString() {
-        return "Book: '" + this.name + "', Author: '" + this.author + "', Borrower: '" + this.borrowers + "'";
+        return "Book: '" + this.name + "', Author: '" + this.author + "', Borrower: '" + this.borrower + "'";
     }
 }

@@ -18,8 +18,20 @@ public class Top3ReadBooksQueryResult {
         this.number_of_loans_by_person_in_country = numLoans;
     }
 
+    public Long getCountry_id() {
+        return this.country_id;
+    }
+
+    public void setCountry_id(Long country_id) {
+        this.country_id = country_id;
+    }
+
     public int getBook_id() {
         return this.book_id;
+    }
+
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 
     public String getAuthor() {
@@ -44,5 +56,13 @@ public class Top3ReadBooksQueryResult {
 
     public void setBorrowers(String borrower) {
         this.borrower = borrower;
+    }
+
+    public int getNumberOfLoans() {
+        return this.number_of_loans_by_person_in_country;
+    }
+
+    public void setNumberOfLoans(int num) {
+        this.number_of_loans_by_person_in_country = num;
     }
 }
