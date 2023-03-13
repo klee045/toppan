@@ -19,7 +19,7 @@ More details can be found in the pdf.
 
 ## How to run
 
-1. In the terminal, change directory to the base directory of the backend service application: `cd demo`
+1. In the terminal, change directory to the base directory of the backend service application: `cd library-api`
 2. Run the command: `mvn spring-boot:run`
 3. If all is good, you will see the following image:
 
@@ -28,6 +28,10 @@ More details can be found in the pdf.
 4. We can also test it via [Postman](https://www.postman.com/downloads/). Sending a GET request to `http://localhost:8080/book/getTop3ReadBooks?country_code=us` will yield us the following result as seen in the image:
 
    ![get_req](https://user-images.githubusercontent.com/66959182/223981141-93eb2c76-9d7d-4fd7-8e61-fde60dcb8382.png)
+
+## Testing
+
+1. In the same directory mentioned in the previous section, run: `mvn test`
 
 # Frontend
 
@@ -41,9 +45,13 @@ More details can be found in the pdf.
 
 ## How to run
 
-1. In the terminal, change directory to the base directory of the web app: `cd my-app`
+1. In the terminal, change directory to the base directory of the web app: `cd library-webapp`
 2. Install dependencies: `npm install`
 3. Run the command: `npm start`
 4. If all is good, the web app opened in your browser will look like the one in the following image:
 
    ![image](https://user-images.githubusercontent.com/66959182/224492907-70e22ed2-a799-47e8-922c-e47aada33806.png)
+   
+## Testing
+
+1. In the same directory mentioned in the previous section, run: `npm test`
