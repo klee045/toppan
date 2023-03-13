@@ -25,7 +25,7 @@ const Main = (): React.ReactElement => {
     // Call /getRandomCountry for a countryCode
     const {
       data: { country },
-    } = await axios.get("http://localhost:8080/country/getRandomCountry", {
+    } = await axios.get("http://localhost:8080/getRandomCountry", {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
@@ -35,7 +35,7 @@ const Main = (): React.ReactElement => {
 
     // Call /getTop3ReadBooks and populate books array, set to empty array if exception
     axios
-      .get("http://localhost:8080/book/getTop3ReadBooks", {
+      .get("http://localhost:8080/getTop3ReadBooks", {
         params: {
           country_code: newCountryCode,
         },
