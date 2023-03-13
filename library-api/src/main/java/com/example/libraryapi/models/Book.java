@@ -89,10 +89,10 @@ import jakarta.persistence.ColumnResult;
         SELECT *
         FROM final_results_with_author fr
         WHERE :countryId IS NULL OR fr.country_id = :countryId
-        """, resultSetMapping = "stock_akhir_dto")
-@SqlResultSetMapping(name = "stock_akhir_dto", classes = @ConstructorResult(targetClass = Top3ReadBooksQueryResult.class, columns = {
+        """, resultSetMapping = "Top3ReadBooksQueryResult")
+@SqlResultSetMapping(name = "Top3ReadBooksQueryResult", classes = @ConstructorResult(targetClass = Top3ReadBooksQueryResult.class, columns = {
         @ColumnResult(name = "country_id", type = Long.class), @ColumnResult(name = "book_id", type = Integer.class),
-        @ColumnResult(name = "book", type = String.class), @ColumnResult(name = "author", type = String.class),
+        @ColumnResult(name = "author", type = String.class), @ColumnResult(name = "book", type = String.class),
         @ColumnResult(name = "borrower", type = String.class),
         @ColumnResult(name = "number_of_loans_by_person_in_country", type = Integer.class) }))
 @Entity
